@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
 	
+	before_filter :authorize
+	#http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
 
 	def show
     @article = Article.find(params[:id])
@@ -9,12 +11,12 @@ class ArticlesController < ApplicationController
     @articles = Article.all
   end
 	
-	def new
+ 	def new
 	  @article = Article.new
 	end
 	 
 	def edit
-  @article = Article.find(params[:id])
+  	@article = Article.find(params[:id])
 	end
 
 	def create
@@ -28,7 +30,7 @@ class ArticlesController < ApplicationController
 	end
 	
 	def update
-  @article = Article.find(params[:id])
+  	@article = Article.find(params[:id])
  
 	  if @article.update(article_params)
 	    redirect_to @article
