@@ -6,8 +6,10 @@ Rails.application.routes.draw do
     resources :comments
   end
   
-  root  'articles#index'
   
+  #devise_for :members,:controllers => { :registrations =>'registration'}
+  #match 'dashboard' => 'home#dashboard'
+
   # these routes are for showing users a login form, logging them in, and logging them out.
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
@@ -74,4 +76,11 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   #root 'welcome#index'
+root :to =>'home#index'
+
+devise_for :members,:controllers => { :registrations =>'registration'}
+  
+  #resources :members
+
+  get 'dashboard' => 'home#dashboard'
 end
