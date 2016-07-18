@@ -1,45 +1,16 @@
 <% if member_signed_in? %>
 
 <h3>you have succesfully signed in</h3>
-<%= link_to "Sign Out", destroy_member_session_path, :method => :delete %>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-  </tr>
- 
-  <% Article.all.each do |article| %>
-    <tr>
-      <td><%= article.title %></td>
-      <td><%= article.text %></td>
-      <td><%= link_to 'Show', article_path(article) %></td>
-      <td><%= link_to 'Edit', edit_article_path(article) %></td>
-      <td><%= link_to 'Destroy', article_path(article),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-</table>
+<% end %>
 
-<% else %>
+<%= render :partial => "/shared/list" %>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-  </tr>
- 
-  <% Article.all.each do |article| %>
-    <tr>
-      <td><%= article.title %></td>
-      <td><%= article.text %></td>
-      <td><%= link_to 'Show', article_path(article) %></td>
-      </tr>
-  <% end %>
-</table>
 
-<%= link_to "Sign In", new_member_session_path, :method => :get %>
-<%= link_to "Sign up", new_member_registration_path, :method => :get %>
-
+<% if !member_signed_in? %>
+          <% param1 = params[:param1]%>
+          <% if param1 = "unsigned"%>
+            <h2>you need to sign in to add new article</h2>
+          <% end %>
+          
 <% end %>

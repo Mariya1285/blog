@@ -1,32 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 <head>
   <title>Blog</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
 </head>
 <body>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
+<% if member_signed_in? %>
+  <div class="row">
+    <%= button_to('Sign Out', destroy_member_session_path, :method => :delete, :class => 'btn btn-default')  %>
+    <%= button_to('Sign up', new_member_registration_path, :method => :get, :class => 'btn btn-default')  %>
+    <%= button_to('Home',root_path,  :method => :get,:class => 'btn btn-default')  %>
 
+<% else %>
+   <div class="row">
+    <%= button_to('Sign In', new_member_session_path, :class => ' btn btn-primary')  %>
+    <%= button_to('Sign up', new_member_registration_path, :method => :get,:class => 'btn btn-primary')%>
+    <%= button_to('Home',  root_path,  :method => :get,:class => 'btn btn-primary')  %>
+   <div>
+<% end %>
 
-
-<% 
-=begin %>
-  <% if current_user %>
-  Signed in as <%= current_user.name %> | <%= link_to "Logout", '/logout' %>
-  
-
-  <% else %>
-    <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
-      
-  <% end %>
-<% 
-=end %>
 
 <% if notice %>
   <p class="alert alert-success"><%= notice %></p>
 <% end %>
+
 <% if alert %>
   <p class="alert alert-danger"><%= alert %></p>
 <% end %>

@@ -2,37 +2,23 @@ class RegistrationController < Devise::RegistrationsController
 
 def new
 
-@member= Member.new
-@contact = Contact.new
+	@member= Member.new
+
 end
 
 def create
 
-@member = Member.new(user_params)
+	@member = Member.new(user_params)
 
-=begin
+	@member.valid?
 
-@member.username = params[:member][:username]
-@member.address = params[:member][:address]
-@member.email = params[:member][:email]
-@member.password = params[:member][:password]
-@member.password_confirmation =params[:member][:password_confirmation]
+	if @member.errors.blank?
+		@member.save
+		redirect_to "/"
+	else
+		render :action => "new"
+	end
 
-=end
-
-@contact = Contact.new
-@contact.mobile = params[:contact][:mobile]
-@contact.country = params[:contact][:country]
-@member.valid?
-if @member.errors.blank?
-
-@member.save
-@contact.member = @member
-@contact.save
-redirect_to dashboard_path
-else
-render :action => "new"
-end
 end
 
 protected
@@ -42,7 +28,9 @@ protected
     end
 
 private
- def user_params
+
+	 def user_params
       params.require(:member).permit(:username, :address, :email, :password, :password_confirmation)
- end
+ 	 end
+ 	 
 end
