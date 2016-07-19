@@ -9,7 +9,8 @@ end
 def create
 
 	@member = Member.new(user_params)
-
+	#@member.add = @member.avatar.build
+	
 	@member.valid?
 
 	if @member.errors.blank?
@@ -30,7 +31,8 @@ protected
 private
 
 	 def user_params
-      params.require(:member).permit(:username, :address, :email, :password, :password_confirmation)
+      params.require(:member).permit(:username, :address, :email, :avatar, :password, :password_confirmation)
+      #@member.avatar.build
  	 end
  	 
 end

@@ -5,6 +5,16 @@ gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '>= 3.2'
 
+#bootstrap thing-->
+
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails"
+
+gem 'carrierwave'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'mini_magick'
+
 gem 'devise', '3.4.1'
 #gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
